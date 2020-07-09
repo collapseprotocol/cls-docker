@@ -16,15 +16,15 @@ services:
       - ./data/:/root/.dpeth
 
     # for masternode use
-    entrypoint: 
-      - bash 
-      - -c
-      - |
-        /app/init.sh && /app/${app} --syncmode 'full' --rpc --rpcaddr 0.0.0.0 --rpcport 18545 --rpccorsdomain '*' --rpcapi 'personal,db,eth,net,web3,txpool,miner,net,alien,admin' --bootnodes "${bootnode}" --mine --port 10303 -unlock '0x8d8C4f9B8f8b2c94F021E2e7D93fEEA45e58726D' --password /root/.dpeth/pass --etherbase "0x8d8C4f9B8f8b2c94F021E2e7D93fEEA45e58726D" --verbosity 5
+    #entrypoint: 
+    #  - bash 
+    #  - -c
+    #  - |
+    #    /app/init.sh && /app/${app} --syncmode 'full' --rpc --rpcaddr localhost --rpcport 18545 --rpccorsdomain '*' --rpcapi 'personal,db,eth,net,web3,txpool,miner,net,admin' --bootnodes "${bootnode}" --mine --port 10303 -unlock '${your miner address}' --password /root/.dpeth/pass --etherbase "${your miner address}" --verbosity 5
 
     # for common node use.
-    # entrypoint: 
-    #   - bash 
-    #   - -c
-    #   - |
-    #     /app/init.sh && /app/${app} --syncmode 'full' --rpc --rpcaddr 0.0.0.0 --rpcport 18545 --rpccorsdomain '*' --rpcapi 'personal,eth,net,web3' --bootnodes "${bootnode}" --port 10303 
+    entrypoint: 
+       - bash 
+       - -c
+       - |
+         /app/init.sh && /app/${app} --syncmode 'full' --rpc --rpcaddr 0.0.0.0 --rpcport 18545 --rpccorsdomain '*' --rpcvhosts '*' --rpcapi 'eth,net,txpool' --bootnodes "${bootnode}" --port 10303  --verbosity 5
